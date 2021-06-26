@@ -1,4 +1,4 @@
-package com.ramgdeveloper.shoppingapp
+package com.ramgdeveloper.shoppingapp.ui
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.ramgdeveloper.shoppingapp.R
 import timber.log.Timber
 
 class SplashScreenFragment : Fragment() {

@@ -1,11 +1,11 @@
 package com.ramgdeveloper.shoppingapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.google.firebase.database.*
 import com.ramgdeveloper.shoppingapp.ShoppingAdapter
 import com.ramgdeveloper.shoppingapp.databinding.FragmentHomeBinding
@@ -25,39 +25,52 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
         databaseReference = FirebaseDatabase.getInstance().getReference("items")
 
+        getItems()
+
+        binding.button2.setOnClickListener {
+            getItems()
+            binding.button2.isVisible = false
+            binding.progressBar.isVisible = true
+
+        }
+
+
+        return view
+    }
+
+    private fun getItems(){
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
+
+                itemList = ArrayList()
                 if (p0.exists()) {
                     for (i in p0.children) {
                         val itm = i.getValue(Items::class.java)
                         itemList.add(itm!!)
-                        Log.d("HomeFragment", "Snapshot")
-                        //Timber.d("Snapshot exists")
-                        //itemList!!.add(itm!!)
-                        //shimmerFrameLayout.visibility = View.GONE
-                       // recyclerView.visibility = View.VISIBLE
+                        Timber.d("Snapshot")
+
                     }
 
                     adapter.submitList(itemList)
                     binding.recyclerView.adapter = adapter
-                    //val adapter = ItemsAdapter(applicationContext, itemList!!)
-                    //mRecyclerView.adapter = adapter
+                    binding.progressBar.isVisible = false
                 }
                 else{
-                    Log.d("HomeFragment", "No Snapshot")
+                    Timber.d("No Snapshot")
+                    binding.progressBar.isVisible = true
+                    binding.button2.isVisible = true
                 }
             }
         })
-        return view
     }
 
 }

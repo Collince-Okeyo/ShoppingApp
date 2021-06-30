@@ -1,5 +1,6 @@
 package com.ramgdeveloper.shoppingapp
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -22,11 +23,12 @@ class ShoppingAdapter: ListAdapter<Items,ShoppingAdapter.MyViewHolder>(DiffUtiCa
     }
 
     inner class MyViewHolder(private val binding: ItemsRowBinding): RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(items: Items?) {
             Glide.with(binding.itemImageView).load(items?.itemImage).placeholder(R.drawable.ic_rolling).into(binding.itemImageView)
 
             binding.nameTv.text = items?.itemName
-            binding.itemPrice.text = items?.itemPrice
+            binding.itemPrice.text = "Ksh: ${items?.itemPrice}"
         }
     }
 

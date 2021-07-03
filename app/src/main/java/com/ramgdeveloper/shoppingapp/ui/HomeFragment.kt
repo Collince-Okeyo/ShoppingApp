@@ -1,6 +1,8 @@
 package com.ramgdeveloper.shoppingapp.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +33,10 @@ class HomeFragment : Fragment() {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("items")
 
-        getItems()
+        //getItems()
+        Handler(Looper.myLooper()!!).postDelayed({
+            getItems()
+        }, 3000)
 
         binding.button2.setOnClickListener {
             getItems()
@@ -45,6 +50,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getItems(){
+
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }

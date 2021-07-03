@@ -25,7 +25,7 @@ class ShoppingAdapter: ListAdapter<Items,ShoppingAdapter.MyViewHolder>(DiffUtiCa
     inner class MyViewHolder(private val binding: ItemsRowBinding): RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(items: Items?) {
-            Glide.with(binding.itemImageView).load(items?.itemImage).placeholder(R.drawable.ic_rolling).into(binding.itemImageView)
+            Glide.with(binding.itemImageView).load(items?.itemImage).placeholder(R.drawable.ic_rolling_0_7s_128px).into(binding.itemImageView)
 
             binding.nameTv.text = items?.itemName
             binding.itemPrice.text = "Ksh: ${items?.itemPrice}"

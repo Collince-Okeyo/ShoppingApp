@@ -33,24 +33,6 @@ class HomeFragment : Fragment() {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("items")
 
-        //getItems()
-        Handler(Looper.myLooper()!!).postDelayed({
-            getItems()
-        }, 3000)
-
-        binding.button2.setOnClickListener {
-            getItems()
-            binding.button2.isVisible = false
-            binding.progressBar.isVisible = true
-
-        }
-
-
-        return view
-    }
-
-    private fun getItems(){
-
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -68,15 +50,17 @@ class HomeFragment : Fragment() {
 
                     adapter.submitList(itemList)
                     binding.recyclerView.adapter = adapter
-                    binding.progressBar.isVisible = false
+                    // binding.progressBar.isVisible = false
                 }
                 else{
                     Timber.d("No Snapshot")
-                    binding.progressBar.isVisible = true
-                    binding.button2.isVisible = true
+                    // binding.progressBar.isVisible = true
+                    //binding.button2.isVisible = true
                 }
             }
         })
+
+        return view
     }
 
 }

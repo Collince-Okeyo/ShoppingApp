@@ -70,6 +70,7 @@ dependencies {
 
     implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
 
+    implementation 'com.github.MosesWangira:moses.altruism.network:v1.0.1'
 
 }
 

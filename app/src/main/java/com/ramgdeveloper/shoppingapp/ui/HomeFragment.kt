@@ -1,21 +1,18 @@
 package com.ramgdeveloper.shoppingapp.ui
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.google.firebase.database.*
+import com.mosesaltruism.mosesaltruism.NetworkStates
 import com.ramgdeveloper.shoppingapp.ShoppingAdapter
 import com.ramgdeveloper.shoppingapp.databinding.FragmentHomeBinding
 import com.ramgdeveloper.shoppingapp.model.Items
 import timber.log.Timber
 
-
-class HomeFragment : Fragment() {
+class HomeFragment : NetworkStates(){
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var databaseReference: DatabaseReference

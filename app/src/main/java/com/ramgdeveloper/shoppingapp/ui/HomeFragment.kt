@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.firebase.database.*
 import com.mosesaltruism.mosesaltruism.NetworkStates
 import com.ramgdeveloper.shoppingapp.ShoppingAdapter
@@ -58,6 +59,12 @@ class HomeFragment : NetworkStates(){
         })
 
         return view
+    }
+
+    private fun addToCat(){
+        binding.cartImage.setOnClickListener {
+            Toast.makeText(requireContext(), "Cart clicked", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

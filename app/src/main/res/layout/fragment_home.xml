@@ -58,13 +58,13 @@
         android:layout_marginBottom="8dp"
         android:theme="@style/MyCustomTheme"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/cartImage"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent"
         app:mt_roundedSearchBarEnabled="true" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/cartImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

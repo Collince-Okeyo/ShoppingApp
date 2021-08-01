@@ -20,7 +20,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Let's go Shopping"
+        android:text="@string/let_s_go_shopping"
         android:textSize="18sp"
         android:textColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"

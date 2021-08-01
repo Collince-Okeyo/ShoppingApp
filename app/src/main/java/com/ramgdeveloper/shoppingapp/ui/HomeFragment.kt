@@ -29,6 +29,10 @@ class HomeFragment : NetworkStates(){
        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        binding.cartImage.setOnClickListener {
+            Toast.makeText(requireContext(), "Cart Items Clicked", Toast.LENGTH_SHORT).show()
+        }
+
         databaseReference = FirebaseDatabase.getInstance().getReference("items")
 
         databaseReference.addValueEventListener(object : ValueEventListener {
@@ -59,12 +63,6 @@ class HomeFragment : NetworkStates(){
         })
 
         return view
-    }
-
-    private fun addToCat(){
-        binding.cartImage.setOnClickListener {
-            Toast.makeText(requireContext(), "Cart clicked", Toast.LENGTH_SHORT).show()
-        }
     }
 
 }

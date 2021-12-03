@@ -1,13 +1,15 @@
-package com.ramgdeveloper.shoppingapp.auth
+package com.ramgdeveloper.shoppingapp.ui.auth
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,6 +24,7 @@ import timber.log.Timber
 class LogInFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var progress: ProgressBar
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentLogInBinding
 
@@ -29,14 +32,13 @@ class LogInFragment : Fragment() {
         private const val RC_SIGN_IN = 1
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLogInBinding.inflate(inflater, container, false)
         val view = binding.root
-
+        progress = binding.progressBar
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -50,6 +52,7 @@ class LogInFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         binding.button.setOnClickListener {
+            progress.visibility = VISIBLE
             signIn()
         }
         return view
@@ -91,9 +94,11 @@ class LogInFragment : Fragment() {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
+                        Toast.makeText(requireContext(), "Task Successful", Toast.LENGTH_SHORT).show()
                         // Sign in success, update UI with the signed-in user's information
                         Timber.d("signInWithCredential:success")
                         findNavController().navigate(R.id.action_logInFragment_to_homeFragment)
+                        progress.visibility = INVISIBLE
                     } else {
                         // If sign in fails, display a message to the user.
                         Timber.tag(task.exception.toString())

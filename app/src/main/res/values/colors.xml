@@ -7,18 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="main">#fdbf00</color>
-
-
-
-
-
-
-
-
-
-
-
+    <color name="main">#F403F0</color>
 
     //Material SearchBar Light Theme Colors
     <color name="searchBarIconColor">#3a3a3a</color>

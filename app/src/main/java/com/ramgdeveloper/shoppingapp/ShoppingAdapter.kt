@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.ramgdeveloper.shoppingapp.databinding.ItemsRowBinding
 import com.ramgdeveloper.shoppingapp.model.Items
 
-class ShoppingAdapter: ListAdapter<Items,ShoppingAdapter.MyViewHolder>(DiffUtiCallback) {
+ class ShoppingAdapter(var itemsList: ArrayList<Items>): ListAdapter<Items,ShoppingAdapter.MyViewHolder>(DiffUtiCallback) {
 
     object DiffUtiCallback: DiffUtil.ItemCallback<Items>() {
         override fun areItemsTheSame(oldItem: Items, newItem: Items): Boolean {
@@ -39,5 +39,6 @@ class ShoppingAdapter: ListAdapter<Items,ShoppingAdapter.MyViewHolder>(DiffUtiCa
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val items = getItem(position)
         holder.bind(items)
+        itemsList.add(items)
     }
 }

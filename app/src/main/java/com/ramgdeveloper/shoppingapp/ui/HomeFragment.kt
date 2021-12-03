@@ -1,12 +1,12 @@
 package com.ramgdeveloper.shoppingapp.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.database.*
+import com.mancj.materialsearchbar.MaterialSearchBar
 import com.mosesaltruism.mosesaltruism.NetworkStates
 import com.ramgdeveloper.shoppingapp.ShoppingAdapter
 import com.ramgdeveloper.shoppingapp.databinding.FragmentHomeBinding
@@ -17,10 +17,10 @@ class HomeFragment : NetworkStates(){
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var itemList: ArrayList<Items>
-        private val adapter by lazy {
-        ShoppingAdapter()
-    }
+    private var items: ArrayList<Items> = arrayListOf()
+    private var adapter: ShoppingAdapter = ShoppingAdapter(items)
+    //private var items: ArrayList<Items> = arrayListOf()
+    private var matchedItems: ArrayList<Items> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,16 +41,16 @@ class HomeFragment : NetworkStates(){
 
             override fun onDataChange(p0: DataSnapshot) {
 
-                itemList = ArrayList()
+                items = ArrayList()
                 if (p0.exists()) {
                     for (i in p0.children) {
                         val itm = i.getValue(Items::class.java)
-                        itemList.add(itm!!)
+                        items.add(itm!!)
                         Timber.d("Snapshot")
 
                     }
 
-                    adapter.submitList(itemList)
+                    adapter.submitList(items)
                     binding.recyclerView.adapter = adapter
                     // binding.progressBar.isVisible = false
                 }
@@ -62,7 +62,46 @@ class HomeFragment : NetworkStates(){
             }
         })
 
+        searchItems()
         return view
     }
 
+    private fun searchItems(){
+        binding.materialSearchBar.setOnSearchActionListener(object : MaterialSearchBar.OnSearchActionListener{
+            override fun onSearchStateChanged(enabled: Boolean) {
+                search(enabled.toString())
+            }
+
+            override fun onSearchConfirmed(text: CharSequence?) {
+                search(text.toString())
+            }
+
+            override fun onButtonClicked(buttonCode: Int) {
+
+            }
+        })
+    }
+
+    private fun search(text: String){
+        matchedItems = arrayListOf()
+
+        text?.let {
+            items.forEach { item ->
+                if (item.itemName!!.contains(text, true) || item.itemPrice!!.contains(text, true)){
+                    matchedItems.add(item)
+                }
+                updateRecyclerView()
+                if (matchedItems.isEmpty()){
+                    Toast.makeText(requireContext(), "No match found", Toast.LENGTH_SHORT).show()
+                }
+                updateRecyclerView()
+            }
+        }
+    }
+
+    private fun updateRecyclerView() {
+        binding.recyclerView.apply {
+            this.adapter?.notifyDataSetChanged()
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.ramgdeveloper.shoppingapp.ui
+package com.ramgdeveloper.shoppingapp.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,21 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.database.*
-import com.mancj.materialsearchbar.MaterialSearchBar
 import com.mosesaltruism.mosesaltruism.NetworkStates
-import com.ramgdeveloper.shoppingapp.ShoppingAdapter
+import com.ramgdeveloper.shoppingapp.adapter.ShoppingAdapter
 import com.ramgdeveloper.shoppingapp.databinding.FragmentHomeBinding
-import com.ramgdeveloper.shoppingapp.model.Items
+import com.ramgdeveloper.shoppingapp.model.ItemsEntity
 import timber.log.Timber
 
 class HomeFragment : NetworkStates(){
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var databaseReference: DatabaseReference
-    private var items: ArrayList<Items> = arrayListOf()
+    private var items: ArrayList<ItemsEntity> = arrayListOf()
     private var adapter: ShoppingAdapter = ShoppingAdapter(items)
     //private var items: ArrayList<Items> = arrayListOf()
-    private var matchedItems: ArrayList<Items> = arrayListOf()
+    private var matchedItems: ArrayList<ItemsEntity> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +43,7 @@ class HomeFragment : NetworkStates(){
                 items = ArrayList()
                 if (p0.exists()) {
                     for (i in p0.children) {
-                        val itm = i.getValue(Items::class.java)
+                        val itm = i.getValue(ItemsEntity::class.java)
                         items.add(itm!!)
                         Timber.d("Snapshot")
 
@@ -62,11 +61,10 @@ class HomeFragment : NetworkStates(){
             }
         })
 
-        searchItems()
         return view
     }
 
-    private fun searchItems(){
+/*    private fun searchItems(){
         binding.materialSearchBar.setOnSearchActionListener(object : MaterialSearchBar.OnSearchActionListener{
             override fun onSearchStateChanged(enabled: Boolean) {
                 search(enabled.toString())
@@ -103,5 +101,5 @@ class HomeFragment : NetworkStates(){
         binding.recyclerView.apply {
             this.adapter?.notifyDataSetChanged()
         }
-    }
+    }*/
 }

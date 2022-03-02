@@ -1,4 +1,4 @@
-package com.ramgdeveloper.shoppingapp.ui.auth
+package com.ramgdeveloper.shoppingapp.ui.fragment.auth
 
 import android.content.Intent
 import android.os.Bundle

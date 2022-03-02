@@ -1,10 +1,11 @@
-package com.ramgdeveloper.shoppingapp
+package com.ramgdeveloper.shoppingapp.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ramgdeveloper.shoppingapp.R
 
 class DetailsFragment : Fragment() {
 

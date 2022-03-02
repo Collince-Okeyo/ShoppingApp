@@ -1,6 +1,7 @@
-package com.ramgdeveloper.shoppingapp
+package com.ramgdeveloper
 
 import android.app.Application
+import com.ramgdeveloper.shoppingapp.BuildConfig
 import timber.log.Timber
 
 class ShoppingTimber: Application() {

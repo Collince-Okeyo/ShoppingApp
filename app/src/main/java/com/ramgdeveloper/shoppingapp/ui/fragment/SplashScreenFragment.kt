@@ -1,4 +1,4 @@
-package com.ramgdeveloper.shoppingapp.ui
+package com.ramgdeveloper.shoppingapp.ui.fragment
 
 import android.os.Bundle
 import android.os.Handler

@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.ramgdeveloper.shoppingapp.ui.HomeFragment"
+        android:name="com.ramgdeveloper.shoppingapp.ui.fragment.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.ramgdeveloper.shoppingapp.ui.auth.LogInFragment"
+        android:name="com.ramgdeveloper.shoppingapp.ui.fragment.auth.LogInFragment"
         android:label="LogIn"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.ramgdeveloper.shoppingapp.ui.SplashScreenFragment"
+        android:name="com.ramgdeveloper.shoppingapp.ui.fragment.SplashScreenFragment"
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreenFragment_to_logInFragment"

@@ -2,9 +2,11 @@ package com.ramgdeveloper
 
 import android.app.Application
 import com.ramgdeveloper.shoppingapp.BuildConfig
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
-class ShoppingTimber: Application() {
+@HiltAndroidApp
+class ShoppingApp: Application() {
     override fun onCreate() {
         super.onCreate()
 

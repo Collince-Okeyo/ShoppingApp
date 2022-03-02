@@ -6,16 +6,17 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.ramgdeveloper.shoppingapp.model.ItemsEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertItems(items: List<ItemsEntity>)
+    suspend fun insertItems(items: ItemsEntity)
 
-    @Query("SELECT * FROM items")
-    fun getAllItems(): LiveData<List<ItemsEntity>>
+    @Query("SELECT * FROM items ORDER BY id ASC ")
+    fun getAllItems(): Flow<List<ItemsEntity>>
 
-    @Query("DELETE FROM items")
-    suspend fun deleteItems()
+    @Query("SELECT * FROM items WHERE itemName LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): Flow<List<ItemsEntity>>
 
 }

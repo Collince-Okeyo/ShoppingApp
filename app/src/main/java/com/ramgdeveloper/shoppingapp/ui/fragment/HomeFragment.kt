@@ -1,18 +1,18 @@
 package com.ramgdeveloper.shoppingapp.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import android.widget.Toast
 import com.google.firebase.database.*
 import com.mosesaltruism.mosesaltruism.NetworkStates
+import com.ramgdeveloper.shoppingapp.R
 import com.ramgdeveloper.shoppingapp.adapter.ShoppingAdapter
 import com.ramgdeveloper.shoppingapp.databinding.FragmentHomeBinding
 import com.ramgdeveloper.shoppingapp.model.ItemsEntity
 import timber.log.Timber
 
-class HomeFragment : NetworkStates(){
+class HomeFragment : NetworkStates(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var databaseReference: DatabaseReference
@@ -62,6 +62,23 @@ class HomeFragment : NetworkStates(){
         })
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+
+        val search = menu?.findItem(R.id.searchMenu)
+        val searchView = search?.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        TODO("Not yet implemented")
     }
 
 /*    private fun searchItems(){
